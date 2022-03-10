@@ -39,7 +39,7 @@ export const login = (body, navigate) => async dispatch => {
       localStorage.setItem("data", JSON.stringify(response.data));
       localStorage.setItem("jwt-token", JSON.stringify(response.access_token));
       dispatch({ type: LOGIN_SCS, payload: { user: decode, data: response } });
-      navigate("/start");
+      navigate("/start")
     }
   } else {
     NotificationManager.error(response.status.description);
@@ -59,12 +59,12 @@ export const renewToken = async history => {
       localStorage.setItem("user", JSON.stringify(decode));
       localStorage.setItem("data", JSON.stringify(response.data));
       localStorage.setItem("jwt-token", JSON.stringify(response.access_token));
-      history.push("admin");
+      history.push("/start");
     }
   }
 };
 
-export const logOut = navigate => dispatch => {
+export const logOut = (navigate) => dispatch => {
   dispatch({ type: LOGOUT_USER });
   localStorage.clear();
   navigate("/login");

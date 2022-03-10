@@ -2,12 +2,14 @@
 import React from "react";
 
 // Router
-import { BrowserRouter } from "react-router-dom";
+//import { Router } from "react-router-dom";
 import MainRouter from "Router/MainRouter";
+import CustomRouter from "Router/CustomRouter";
 
 // Notification manager
 import { NotificationContainer } from "react-notifications";
 import "react-notifications/lib/notifications.css";
+import { createBrowserHistory } from "history";
 
 // Redux
 import { Provider } from "react-redux";
@@ -23,17 +25,19 @@ import "./localization/i18n";
 
 require("babel-polyfill");
 
+const history = createBrowserHistory()
 
 const App = () => {
+
 	return (
 		<Provider store={configureStore()}>
 			<NotificationContainer />
 			<StyledEngineProvider injectFirst>
 				<ThemeProvider theme={theme}>
 					<CssBaseline />
-					<BrowserRouter>
+					<CustomRouter history={history}>
 						<MainRouter />
-					</BrowserRouter>
+					</CustomRouter>
 				</ThemeProvider>
 			</StyledEngineProvider>
 		</Provider>

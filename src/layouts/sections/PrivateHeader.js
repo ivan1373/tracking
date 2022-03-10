@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 // MUI
 import { AppBar, Toolbar, Box } from "@mui/material";
 import makeStyles from '@mui/styles/makeStyles';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 // Atoms
 import Logo from "Components/atoms/UI/Logo";
@@ -44,7 +45,7 @@ const PrivateHeader = () => {
 					<Logo width="115px" goTo={user ? "start" : ""} />
 				</Box>
 				<Box>
-					<IconButton icon="settings" onClick={() => console.log("clicked")} size="large" />
+					<IconButton icon={<SettingsIcon />} onClick={() => console.log("clicked")} size="large" />
 				</Box>
 				<Box>
 					<ChangeLanguage color="secondary" />

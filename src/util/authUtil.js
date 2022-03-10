@@ -33,9 +33,4 @@ export function checkToken() {
       window.location.reload();
     }
   }
-  else {
-    localStorage.clear();
-      history.push("/login");
-      window.location.reload();
-  }
 }

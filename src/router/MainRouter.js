@@ -1,11 +1,10 @@
 // React
-import React, { useEffect, lazy, Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import {
 	Navigate,
 	Route,
 	useLocation,
 	Routes,
-	useNavigate,
 } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
@@ -20,7 +19,6 @@ import LoginLayout from "Layouts/LoginLayout";
 import StartLayout from "Layouts/StartLayout";
 import TripleLayout from "Layouts/TripleLayout";
 
-import { checkToken } from "../util/authUtil";
 
 // Components
 const Home = lazy(() => import("Pages/home/index.js"));
@@ -32,10 +30,12 @@ const Statistics = lazy(() => import("Pages/statistics/index.js"));
 const PublicRoutes = ({
 	component: Component,
 	layout: Layout,
+	user,
 	title,
 	description,
+	location
 }) => {
-	return (
+	return user === null ? (
 		<Layout>
 			<Helmet>
 				<title>TripleHost tracking system | {title}</title>
@@ -43,6 +43,8 @@ const PublicRoutes = ({
 			</Helmet>
 			<Component />
 		</Layout>
+	) : (
+		<Navigate to="/start" state={location} />
 	);
 };
 
@@ -69,14 +71,8 @@ const PrivateRoutes = ({
 
 const MainRouter = () => {
 	const location = useLocation();
-	const navigate = useNavigate();
 	const user = JSON.parse(localStorage.getItem("user"));
 
-	useEffect(() => {
-		if (user !== null && (location.pathname === "/login" || location.pathname === "/")) {
-			navigate("/start");
-		}
-	}, [user]);
     
 	return (
 		<Suspense fallback={<FullScreenSpinner />}>
@@ -88,6 +84,8 @@ const MainRouter = () => {
 							component={Home}
 							layout={StartLayout}
 							title={"Homepage"}
+							user={user}
+							location={location}
 							description={"Homepage section"}
 						/>
 					}
@@ -99,6 +97,8 @@ const MainRouter = () => {
 							component={LoginLayout}
 							layout={StartLayout}
 							title={"Log in"}
+							user={user}
+							location={location}
 							description={"Log in section"}
 						/>
 					}

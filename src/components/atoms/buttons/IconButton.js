@@ -15,7 +15,7 @@ const IconButton = props => {
         onClick(e);
       }}
     >
-      <Icon>{icon}</Icon>
+      {icon}
     </IconButtonMUI>
   );
 };

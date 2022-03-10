@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 // MUI
 import Popover from "@mui/material/Popover";
+import LanguageIcon from '@mui/icons-material/Language';
 
 // Atoms
 import IconButton from "Components/atoms/buttons/IconButton";
@@ -52,7 +53,7 @@ const ChangeLanguage = props => {
   const id = open ? "simple-popover" : undefined;
 
   return <>
-    <IconButton icon="language" color={color} onClick={handleClick} size="large" />
+    <IconButton icon={<LanguageIcon />} color={color} onClick={handleClick} size="large" />
     <Popover
       id={id}
       open={open}

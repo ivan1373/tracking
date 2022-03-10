@@ -34,10 +34,10 @@ const LoginLayout = () => {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const classes = style();
+  const navigate = useNavigate()
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     const body = {
@@ -47,7 +47,7 @@ const LoginLayout = () => {
       organisation: {"id": "8107954a-f821-4356-a36d-80f83e39ca19"}
     };
 
-    dispatch(login(body, navigate));
+     dispatch(login(body, navigate));
   };
 
   return (
@@ -55,7 +55,6 @@ const LoginLayout = () => {
       <Header />
       <Container maxWidth="xs" className={classes.container}>
         <Logo width="100%" />
-        <form>
           <Input
             label="Username"
             value={username}
@@ -78,7 +77,6 @@ const LoginLayout = () => {
               fullWidth
             />
           </Box>
-        </form>
       </Container>
     </>
   );
