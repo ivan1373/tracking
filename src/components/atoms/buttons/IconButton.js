@@ -3,7 +3,6 @@ import React from "react";
 
 // MUI
 import IconButtonMUI from "@mui/material/IconButton";
-import Icon from "@mui/material/Icon";
 
 const IconButton = props => {
   const { onClick, color, icon } = props;
