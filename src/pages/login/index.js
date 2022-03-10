@@ -29,7 +29,7 @@ const style = makeStyles(theme => ({
   }
 }));
 
-const LoginLayout = () => {
+const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -82,4 +82,4 @@ const LoginLayout = () => {
   );
 };
 
-export default LoginLayout;
+export default Login;

@@ -23,7 +23,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 // Localization
 import "./localization/i18n";
 
-require("babel-polyfill");
+//require("babel-polyfill");
 
 const history = createBrowserHistory()
 

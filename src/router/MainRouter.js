@@ -1,11 +1,6 @@
 // React
 import React, { lazy, Suspense } from "react";
-import {
-	Navigate,
-	Route,
-	useLocation,
-	Routes,
-} from "react-router-dom";
+import { Navigate, Route, useLocation, Routes } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 // Misc
@@ -15,13 +10,12 @@ import NotFoundPage from "Layouts/NotFoundPage";
 import FullScreenSpinner from "Layouts/loaders/FullScreenSpinner";
 
 // Layouts
-import LoginLayout from "Layouts/LoginLayout";
 import StartLayout from "Layouts/StartLayout";
 import TripleLayout from "Layouts/TripleLayout";
 
-
 // Components
 const Home = lazy(() => import("Pages/home/index.js"));
+const Login = lazy(() => import("Pages/login/index.js"));
 const Start = lazy(() => import("Pages/start/index.js"));
 const MapView = lazy(() => import("Pages/map/index.js"));
 const TableView = lazy(() => import("Pages/table/index.js"));
@@ -33,7 +27,7 @@ const PublicRoutes = ({
 	user,
 	title,
 	description,
-	location
+	location,
 }) => {
 	return user === null ? (
 		<Layout>
@@ -73,7 +67,6 @@ const MainRouter = () => {
 	const location = useLocation();
 	const user = JSON.parse(localStorage.getItem("user"));
 
-    
 	return (
 		<Suspense fallback={<FullScreenSpinner />}>
 			<Routes>
@@ -94,7 +87,7 @@ const MainRouter = () => {
 					path="/login"
 					element={
 						<PublicRoutes
-							component={LoginLayout}
+							component={Login}
 							layout={StartLayout}
 							title={"Log in"}
 							user={user}
@@ -103,7 +96,7 @@ const MainRouter = () => {
 						/>
 					}
 				/>
-				{/* Private Route */}
+				{/* Private routes */}
 				<Route
 					path="/start"
 					element={
