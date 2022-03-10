@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+// React
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// Router
+import { BrowserRouter } from "react-router-dom";
+import MainRouter from "Router/MainRouter";
+
+// Notification manager
+import { NotificationContainer } from "react-notifications";
+import "react-notifications/lib/notifications.css";
+
+// Redux
+import { Provider } from "react-redux";
+import configureStore from "Modules/configureStore";
+
+// Theme
+import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
+import theme from "Styles/theme";
+import CssBaseline from "@mui/material/CssBaseline";
+
+// Localization
+import "./localization/i18n";
+
+require("babel-polyfill");
+
+
+const App = () => {
+	return (
+		<Provider store={configureStore()}>
+			<NotificationContainer />
+			<StyledEngineProvider injectFirst>
+				<ThemeProvider theme={theme}>
+					<CssBaseline />
+					<BrowserRouter>
+						<MainRouter />
+					</BrowserRouter>
+				</ThemeProvider>
+			</StyledEngineProvider>
+		</Provider>
+	);
+};
 
 export default App;
