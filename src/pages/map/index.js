@@ -1,10 +1,5 @@
-// React
-import React from 'react'
+const Map = () => {
+	return <div>Map</div>;
+};
 
-const MapView = () => {
-  return (
-    <div>MapView</div>
-  )
-}
-
-export default MapView
+export default Map;

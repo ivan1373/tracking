@@ -1,10 +1,5 @@
-// React
-import React from 'react'
-
 const Start = () => {
-  return (
-    <div>Start page</div>
-  )
-}
+	return <div>Start</div>;
+};
 
-export default Start
+export default Start;

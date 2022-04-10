@@ -1,47 +1,37 @@
-// React
-import React from "react";
+import Router from "router";
+import toast, { Toaster } from "react-hot-toast";
+import { QueryClient, QueryClientProvider, QueryCache } from "react-query";
 
-// Router
-//import { Router } from "react-router-dom";
-import MainRouter from "Router/MainRouter";
-import CustomRouter from "Router/CustomRouter";
-
-// Notification manager
-import { NotificationContainer } from "react-notifications";
-import "react-notifications/lib/notifications.css";
-import { createBrowserHistory } from "history";
-
-// Redux
-import { Provider } from "react-redux";
-import configureStore from "Modules/configureStore";
-
-// Theme
-import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
-import theme from "Styles/theme";
 import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
 
-// Localization
-import "./localization/i18n";
+import theme from "styles/theme";
+import "i18n/index";
 
-//require("babel-polyfill");
+const queryClient = new QueryClient({
+	queryCache: new QueryCache({
+		onError: () => {
+			toast.error(`Something went wrong!`);
+		},
+	}),
+	defaultOptions: {
+		queries: {
+			retry: false,
+			refetchOnWindowFocus: false,
+		},
+	},
+});
 
-const history = createBrowserHistory()
-
-const App = () => {
-
+function App() {
 	return (
-		<Provider store={configureStore()}>
-			<NotificationContainer />
-			<StyledEngineProvider injectFirst>
-				<ThemeProvider theme={theme}>
-					<CssBaseline />
-					<CustomRouter history={history}>
-						<MainRouter />
-					</CustomRouter>
-				</ThemeProvider>
-			</StyledEngineProvider>
-		</Provider>
+		<QueryClientProvider client={queryClient}>
+			<ThemeProvider theme={theme}>
+				<CssBaseline />
+				<Router />
+				<Toaster />
+			</ThemeProvider>
+		</QueryClientProvider>
 	);
-};
+}
 
 export default App;

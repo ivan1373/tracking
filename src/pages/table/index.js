@@ -1,10 +1,5 @@
-// React
-import React from 'react'
+const Table = () => {
+	return <div>Table</div>;
+};
 
-const TableView = () => {
-  return (
-    <div>TableView</div>
-  )
-}
-
-export default TableView
+export default Table;
