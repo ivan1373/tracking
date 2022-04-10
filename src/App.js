@@ -1,6 +1,7 @@
 import Router from "router";
 import toast, { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider, QueryCache } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
@@ -30,6 +31,7 @@ function App() {
 				<Router />
 				<Toaster />
 			</ThemeProvider>
+			<ReactQueryDevtools initialIsOpen={false} />
 		</QueryClientProvider>
 	);
 }

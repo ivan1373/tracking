@@ -2,22 +2,13 @@ import { TextField, Box, Button } from "@mui/material";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
 import { request, gql } from "graphql-request";
 import Logo from "components/atoms/Logo";
 
 import { useTranslation } from "react-i18next";
 
-const cookies = new Cookies();
-
-// const GET_ALL_SUNBEDS = gql`
-// 	query {
-// 		allsunbeds(roleID: "1") {
-// 			latitude
-// 			longitude
-// 		}
-// 	}
-// `;
+import { setCookies } from "util/functions";
+import { client } from "services/gClient";
 
 const LOGIN_MUTATION = gql`
 	mutation ($username: String!, $password: String!) {
@@ -29,24 +20,32 @@ const LOGIN_MUTATION = gql`
 
 const Login = () => {
 	const { t } = useTranslation();
-
 	const navigate = useNavigate();
+
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 
 	const login = async () => {
-		try {
-			const data = await request(
-				"http://localhost:8000/query",
-				LOGIN_MUTATION,
-				{ username, password }
-			);
-			cookies.set("token", data?.login?.accessToken);
-			navigate("start");
-			toast.success("Logged in successfully!");
-		} catch (error) {
-			toast.error("Login failed!");
-		}
+		// try {
+		// 	const data = await request(
+		// 		"http://localhost:8000/query",
+		// 		LOGIN_MUTATION,
+		// 		{ username, password }
+		// 	);
+		// 	setCookies("token", data?.login?.accessToken);
+		// 	navigate("/start");
+		// 	toast.success("Logged in successfully!");
+		// } catch (error) {
+		// 	toast.error("Login failed!");
+		// }
+		client
+			.request(LOGIN_MUTATION, { username, password })
+			.then((data) => {
+				setCookies("token", data?.login?.accessToken);
+				navigate("/start");
+				toast.success("Logged in successfully!");
+			})
+			.catch((error) => toast.error(error?.response?.errors[0]?.message));
 	};
 
 	return (

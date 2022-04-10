@@ -5,9 +5,9 @@ import Header from "components/organisms/Header";
 import Footer from "components/organisms/Footer";
 
 const PrivateLayout = ({ children }) => (
-	<Container component="main" maxWidth="xl">
+	<Container component="main" maxWidth="lg">
 		<Header />
-		<Box mt={2}>{children}</Box>
+		<Box mt={13}>{children}</Box>
 		<Footer />
 	</Container>
 );

@@ -11,12 +11,10 @@ import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 
 import { privateRoutes, publicRoutes } from "./routes";
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
+import { getFromCookies } from "util/functions";
 
 const RouteMaker = ({ type, layout: Layout, page: Page, path }) => {
-	const user = cookies.get("token");
+	const user = getFromCookies("token");
 	const location = useLocation();
 
 	if (!user && type === "private") {

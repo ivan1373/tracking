@@ -10,18 +10,16 @@ import ChangeLanguage from "./ChangeLanguage";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
+import { getFromCookies, removeFromCookies } from "util/functions";
 
 const Header = () => {
 	const navigate = useNavigate();
-	const user = cookies.get("token");
+	const user = getFromCookies("token");
 
 	return (
-		<AppBar color="transparent" elevation={0} position="relative">
-			<Toolbar disableGutters>
-				<Box sx={{ py: 1, flexGrow: 1 }}>
+		<AppBar color="transparent" elevation={3} position="absolute">
+			<Toolbar>
+				<Box sx={{ py: 2, flexGrow: 1 }}>
 					<Logo onClick={() => navigate("/start")} />
 				</Box>
 
@@ -29,18 +27,18 @@ const Header = () => {
 				<IconButton onClick={() => navigate("/settings")}>
 					<SettingsIcon />
 				</IconButton>
-				<Box pl={1}>
+				{/* <Box pl={1}>
 					{user && (
 						<IconButton
 							onClick={() => {
-								cookies.remove("token");
+								removeFromCookies("token");
 								navigate(`/`);
 							}}
 						>
 							<LogoutIcon />
 						</IconButton>
 					)}
-				</Box>
+				</Box> */}
 			</Toolbar>
 		</AppBar>
 	);
