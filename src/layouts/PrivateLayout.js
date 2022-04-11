@@ -7,7 +7,9 @@ import Footer from "components/organisms/Footer";
 const PrivateLayout = ({ children }) => (
 	<Container component="main" maxWidth="lg">
 		<Header />
-		<Box mt={13}>{children}</Box>
+		<Box sx={{ overflow: "auto" }} mt={13} mb={9}>
+			{children}
+		</Box>
 		<Footer />
 	</Container>
 );

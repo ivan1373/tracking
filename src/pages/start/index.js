@@ -1,31 +1,17 @@
 import { useQuery } from "react-query";
-import { client } from "services/gClient";
-import { gql } from "graphql-request";
-
-import { Skeleton, Box, Typography } from "@mui/material";
-
-const GET_ALL_SUNBEDS = gql`
-	query {
-		allsunbeds(roleID: "1") {
-			latitude
-			longitude
-		}
-	}
-`;
+import { getAllSunbeds } from "services/sunbedService";
+import { Box, Typography } from "@mui/material";
 
 const Start = () => {
-	const { status, data, error, isFetching } = useQuery("sunbeds", async () => {
-		return client
-			.request(GET_ALL_SUNBEDS)
-			.then((data) => data)
-			.catch((error) => console.log(error));
-	});
+	const { status, data, error, isFetching } = useQuery("sunbeds", () =>
+		getAllSunbeds()
+	);
 	return (
 		<Box>
 			<Typography variant="h4">Sunbeds</Typography>
 			<ul>
 				{data?.allsunbeds?.map((sunbed, i) => (
-					<li>{sunbed.latitude}</li>
+					<li key={i}>{sunbed.latitude}</li>
 				))}
 			</ul>
 		</Box>

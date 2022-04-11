@@ -34,7 +34,12 @@ const ChangeLanguage = () => {
 
 	return (
 		<>
-			<Button endIcon={<LanguageIcon />} onClick={handleClick} sx={{ px: 2 }}>
+			<Button
+				color="secondary"
+				endIcon={<LanguageIcon />}
+				onClick={handleClick}
+				sx={{ px: 2 }}
+			>
 				{getFromCookies("lang") || "en"}
 			</Button>
 			<Popover

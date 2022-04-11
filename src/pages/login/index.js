@@ -1,22 +1,10 @@
 import { TextField, Box, Button } from "@mui/material";
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { request, gql } from "graphql-request";
 import Logo from "components/atoms/Logo";
+import { login } from "services/authService";
 
 import { useTranslation } from "react-i18next";
-
-import { setCookies } from "util/functions";
-import { client } from "services/gClient";
-
-const LOGIN_MUTATION = gql`
-	mutation ($username: String!, $password: String!) {
-		login(input: { username: $username, password: $password }) {
-			accessToken
-		}
-	}
-`;
 
 const Login = () => {
 	const { t } = useTranslation();
@@ -24,29 +12,6 @@ const Login = () => {
 
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-
-	const login = async () => {
-		// try {
-		// 	const data = await request(
-		// 		"http://localhost:8000/query",
-		// 		LOGIN_MUTATION,
-		// 		{ username, password }
-		// 	);
-		// 	setCookies("token", data?.login?.accessToken);
-		// 	navigate("/start");
-		// 	toast.success("Logged in successfully!");
-		// } catch (error) {
-		// 	toast.error("Login failed!");
-		// }
-		client
-			.request(LOGIN_MUTATION, { username, password })
-			.then((data) => {
-				setCookies("token", data?.login?.accessToken);
-				navigate("/start");
-				toast.success("Logged in successfully!");
-			})
-			.catch((error) => toast.error(error?.response?.errors[0]?.message));
-	};
 
 	return (
 		<Box
@@ -82,7 +47,7 @@ const Login = () => {
 					fullWidth
 					variant="contained"
 					sx={{ mt: 3, mb: 2 }}
-					onClick={login}
+					onClick={() => login(username, password, navigate)}
 				>
 					{t("Sign in")}
 				</Button>

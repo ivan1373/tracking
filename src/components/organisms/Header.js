@@ -17,14 +17,14 @@ const Header = () => {
 	const user = getFromCookies("token");
 
 	return (
-		<AppBar color="transparent" elevation={3} position="absolute">
+		<AppBar elevation={3} position="fixed">
 			<Toolbar>
 				<Box sx={{ py: 2, flexGrow: 1 }}>
 					<Logo onClick={() => navigate("/start")} />
 				</Box>
 
 				<ChangeLanguage />
-				<IconButton onClick={() => navigate("/settings")}>
+				<IconButton color="secondary" onClick={() => navigate("/settings")}>
 					<SettingsIcon />
 				</IconButton>
 				{/* <Box pl={1}>
