@@ -12,3 +12,16 @@ export const setCookies = (key, value) => {
 export const removeFromCookies = (key) => {
 	cookies.remove(key);
 };
+
+export const authHeader = () => {
+	// return authorization header with jwt token
+	const token = getFromCookies("token");
+
+	if (token) {
+		return {
+			Authorization: `JWT ${token}`,
+			Token: token,
+		};
+	}
+	return {};
+};
